@@ -1,0 +1,36 @@
+CREATE TABLE studentCourseEntity (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    studentId INTEGER NOT NULL,
+    courseId INTEGER NOT NULL,
+    currentMark INTEGER,
+    examMark INTEGER,
+    totalMark INTEGER,
+
+    FOREIGN KEY (studentId) REFERENCES studentEntity(id),
+    FOREIGN KEY (courseId) REFERENCES courseEntity(id),
+    UNIQUE (studentId, courseId)
+);
+
+getStudentCourseById:
+SELECT *
+FROM studentCourseEntity
+WHERE id = :id;
+
+getAllCoursesByStudentId:
+SELECT *
+FROM studentCourseEntity
+WHERE studentId = :studentId;
+
+insertStudentCourse:
+INSERT OR REPLACE
+INTO studentCourseEntity (studentId, courseId, currentMark, examMark, totalMark)
+VALUES (?, ?, ?, ?, ?);
+
+updateStudentCourse:
+UPDATE studentCourseEntity
+SET currentMark = :currentMark, examMark = :examMark, totalMark = :totalMark
+WHERE id = :id;
+
+deleteStudentCourseById:
+DELETE FROM studentCourseEntity
+WHERE id = :id;

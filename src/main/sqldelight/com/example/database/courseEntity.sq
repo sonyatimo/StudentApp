@@ -1,0 +1,28 @@
+CREATE TABLE courseEntity (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE,
+    isExam INTEGER
+);
+
+getCourseById:
+SELECT *
+FROM courseEntity
+WHERE id = :id;
+
+getAllCourses:
+SELECT *
+FROM courseEntity;
+
+insertCourse:
+INSERT OR REPLACE
+INTO courseEntity (name, isExam)
+VALUES (?, ?);
+
+updateCourseById:
+UPDATE courseEntity
+SET name = :firstName, isExam = :isExam
+WHERE id = :id;
+
+deleteCourseById:
+DELETE FROM courseEntity
+WHERE id = :id;

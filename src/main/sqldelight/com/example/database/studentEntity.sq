@@ -1,0 +1,32 @@
+CREATE TABLE studentEntity (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    firstName TEXT NOT NULL,
+    lastName TEXT NOT NULL,
+    groupId INTEGER NOT NULL,
+
+    FOREIGN KEY (groupId) REFERENCES groupEntity(id)
+);
+
+getStudentById:
+SELECT *
+FROM studentEntity
+WHERE id = :id;
+
+getAllStudents:
+SELECT *
+FROM studentEntity;
+
+insertStudent:
+INSERT OR REPLACE
+INTO studentEntity (firstName, lastName, groupId)
+VALUES (?, ?, ?);
+
+updateStudentById:
+UPDATE studentEntity
+SET firstName = :firstName, lastName = :lastName, groupId = :groupId
+WHERE id = :id;
+
+
+deleteStudentById:
+DELETE FROM studentEntity
+WHERE id = :id;
